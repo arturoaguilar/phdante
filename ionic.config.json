@@ -1,0 +1,7 @@
+{
+  "name": "phdante",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
