@@ -2,10 +2,11 @@
   <ion-page>
     <ion-content :fullscreen="true">
       <div id="container">
-        <div class="countdown">{{ timeLeft }}</div>
-        <div class="stage-bar">stage bar</div>
 
-        <div v-show="!answering" id="calls" class="calls">
+        <div v-show="screen == 1" id="calls" class="calls">
+            
+          <div class="countdown">{{ timeLeft }}</div>
+
           <div
             class="amswer"
             @click="answerCall(call)"
@@ -15,26 +16,43 @@
             <span>{{ call.room }}</span>
             <span>{{ call.name }}</span>
           </div>
+
+
+          <div>HERO: {{ heroicPoints }}</div>
+          <div>EVIL: {{ evilPoints }}</div>
+          <button @click="startTime()">Start</button>
+          <button @click="stopTime()">Stop</button>
+          <button @click="restartTime()">Restar</button>
         </div>
 
-        <div v-show="answering" class="selected-call">
+        <div v-show="screen == 2" class="selected-call">
           {{ selectedCall.room }}
           {{ selectedCall.name }}
+
           <p class="call__context">
             {{ selectedCall.context }}
           </p>
           <div
             class="action"
-            @click="choseOption"
+            @click="choseOption(action)"
             v-for="action in selectedCall.actions"
             :key="action.id"
           >
             {{ action.action }}
           </div>
         </div>
+
+        <div v-show="screen == 3">
+          Ganaste:
+          <p>
+            <b>{{ heroicPointsEarned }}</b> puntos heróicos
+          </p>
+          <p>
+            <b> {{ evilPointsEarned }}</b> puntos de maldad
+          </p>
+          <button @click="screen = 1">Aceptar</button>
+        </div>
       </div>
-      <button @click="startTime()">Start</button>
-      <button @click="stopTime()">Stop</button>
     </ion-content>
   </ion-page>
 </template>
@@ -43,6 +61,7 @@ import { IonContent, IonPage } from "@ionic/vue";
 import { ref, toRefs, reactive } from "@vue/reactivity";
 import { defineComponent } from "vue";
 import { watch } from "@vue/runtime-core";
+import axios from "axios";
 export default defineComponent({
   name: "Playing",
   components: {
@@ -54,153 +73,62 @@ export default defineComponent({
       playing: true,
       end: false,
       typeOfEnd: 1,
-      answering: 0,
+      screen: 1,
       timeLeft: 10,
       timeInterval: "",
       level: 1,
+      heroicPointsEarned: 0,
+      evilPointsEarned: 0,
     });
 
     const pageName = ref("Jugando");
-    const callState = {
+    const playerState = reactive({
+      name: "Charlie",
+      hp: 10,
+      heroicPoints: 0,
+      evilPoints: 0,
+    });
+
+    const callState = reactive({
       /* Las llamadas */
       selectedCall: "",
       incomingCalls: [],
-      calls: [
-        {
-          room: 101,
-          name: "Domitila",
-          level: 1,
-          problem: "mis ventanas están sonando mucho",
-          context: "Todo está desordenado",
-          actions: [
-            {
-              id: 1,
-              action: "Cerrar la ventana",
-              heroicPoints: 1,
-              devilPoints: 0,
-              item: "0",
-            },
-            {
-              id: 2,
-              action: "Gritarle",
-              heroicPoints: 0,
-              devilPoints: 1,
-              item: "0",
-            },
-            {
-              id: 3,
-              action: "Decirle que podría ser un espíritu",
-              heroicPoints: 0,
-              devilPoints: 1,
-              item: "0",
-            },
-          ],
-        },
-        {
-          room: 102,
-          name: "Familia Dominguez ",
-          level: 1,
-          problem: "mi perro se quedó atrapado en el baño",
-          context: "Todo está desordenado",
-          actions: [
-            {
-              id: 1,
-              action: "Romper la puerta",
-              heroicPoints: 1,
-              devilPoints: 0,
-              item: "0",
-            },
-            {
-              id: 2,
-              action: "Decirles que no puedes ayudarlos",
-              heroicPoints: 0,
-              devilPoints: 1,
-              item: "0",
-            },
-            {
-              id: 3,
-              action: "Decirle que podría ser un espíritu",
-              heroicPoints: 0,
-              devilPoints: 1,
-              item: "0",
-            },
-          ],
-        },
-        {
-          room: 103,
-          name: "Lucíano",
-          level: 1,
-          problem: "mis ventanas están sonando mucho",
-          context: "Todo está desordenado",
-          actions: [
-            {
-              id: 1,
-              action: "Cerrar la ventana",
-              heroicPoints: 1,
-              devilPoints: 0,
-              item: "0",
-            },
-            {
-              id: 2,
-              action: "Gritarle",
-              heroicPoints: 0,
-              devilPoints: 1,
-              item: "0",
-            },
-            {
-              id: 3,
-              action: "Decirle que podría ser un espíritu",
-              heroicPoints: 0,
-              devilPoints: 1,
-              item: "0",
-            },
-          ],
-        },
-        {
-          room: 104,
-          name: "Soren",
-          level: 1,
-          problem: "M cocína suena mucho",
-          context: "Todo está desordenado",
-          actions: [
-            {
-              id: 1,
-              action: "Cerrar la ventana",
-              heroicPoints: 1,
-              devilPoints: 0,
-              item: "0",
-            },
-            {
-              id: 2,
-              action: "Gritarle",
-              heroicPoints: 0,
-              devilPoints: 1,
-              item: "0",
-            },
-            {
-              id: 3,
-              action: "Decirle que podría ser un espíritu",
-              heroicPoints: 0,
-              devilPoints: 1,
-              item: "0",
-            },
-          ],
-        },
-      ],
+      calls: [],
       /* Fin de las llamadas */
-    };
+    });
+
+    async function getAllCalls() {
+      try {
+        const allCalls = await axios.get("assets/data.json");
+        return allCalls.data.calls;
+      } catch (error) {
+        console.error(error);
+      }
+    }
 
     function getEnterCalls() {
       return callState.calls.sort(() => Math.random() - 0.5);
     }
+
+    (async () => {
+      callState.calls = await getAllCalls();
+      callState.incomingCalls = getEnterCalls(); 
+      console.log("CALL STATE");
+        console.log(callState.incomingCalls);
+    })();
+
+
     function answerCall(call) {
       callState.selectedCall = call;
-      gameState.answering = true;
+      gameState.screen = 2;
     }
 
-    function choseOption(option) {
-      gameState.answering = false;
-      console.log(option);
+    function choseOption(action) {
+      gameState.heroicPointsEarned = action.heroicPoints;
+      gameState.evilPointsEarned = action.evilPoints;
+      playerState.heroicPoints = playerState.heroicPoints + action.heroicPoints;
+      playerState.evilPoints = playerState.evilPoints + action.evilPoints;
+      gameState.screen = 3;
     }
 
     function getTime() {
@@ -214,33 +142,40 @@ export default defineComponent({
     }
 
     function startTime() {
-      console.log("STARTING");
-      console.log(gameState.timeInterval);
+      // console.log(gameState.timeInterval);
       getTime();
     }
     function stopTime() {
-      console.log("STOP");
       clearInterval(gameState.timeInterval);
     }
 
-function restarTime() {
-    gameState.timeLeft =10;
-}
+    function restartTime() {
+      //  stopTime();
+      gameState.timeLeft = 10;
+      // startTime();
+    }
     watch(() => {
-      if (gameState.timeLeft==0){
-       callState.incomingCalls = getEnterCalls();
-       stopTime();
-       restarTime();
-       startTime();
+      if (gameState.timeLeft == 0) {
+        callState.incomingCalls = getEnterCalls();
+        stopTime();
+        restartTime();
+        startTime();
       } else {
-       console.log(gameState.timeLeft);
+        console.log(gameState.timeLeft);
       }
     });
 
-    callState.incomingCalls = getEnterCalls();
+console.log("Game State");
+    console.log(gameState);
+    console.log("Calls State");
+    console.log(callState);
+    console.log("Players State");
+    console.log(playerState);
     return {
       ...toRefs(gameState),
       ...toRefs(callState),
+      ...toRefs(playerState),
+      restartTime,
       pageName,
       choseOption,
       answerCall,
@@ -254,7 +189,7 @@ function restarTime() {
 .amswer {
   width: 100%;
   border: solid 1px;
-  border-radius: 10px;
+
   padding-block: 10px;
   margin-block: 10px;
   /*
@@ -280,13 +215,11 @@ function restarTime() {
 .action {
   width: 100%;
   border: solid 1px;
-  border-radius: 10px;
   padding-block: 10px;
   margin-block: 10px;
 }
 
 .call__context {
-  border-radius: 5px;
   border: solid 1px;
   padding: 30px;
 }

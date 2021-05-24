@@ -13,7 +13,7 @@
 
       <div id="container">
         <p>{{ welcomeParagraph }}</p>
-        <button @click="begin()" class="begin-button">¡Comenzar!</button>
+        <button @click="begin()" class="button--begin">¡Comenzar!</button>
       </div>
     </ion-content>
   </ion-page>
@@ -48,9 +48,12 @@ export default defineComponent({
 </script>
 
 <style scoped>
-#container {
-  text-align: center;
 
+#container {
+  display: flex;
+  flex-direction: column;
+  padding-inline: 20px;
+  text-align: center;
   position: absolute;
   left: 0;
   right: 0;
@@ -74,5 +77,8 @@ export default defineComponent({
 
 #container a {
   text-decoration: none;
+}
+.button--begin{
+ height: 60px;
 }
 </style>

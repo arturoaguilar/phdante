@@ -1,0 +1,123 @@
+{      
+    "calls": [
+    {
+      "room": 101,
+      "name": "Domitila",
+      "level": 1,
+      "problem": "mis ventanas están sonando mucho",
+      "context": "Todo está desordenado",
+      "actions": [
+        {
+          "id": 1,
+          "action": "Cerrar la ventana",
+          "heroicPoints": 1,
+          "evilPoints": 0,
+          "item": "0"
+        },
+        {
+          "id": 2,
+          "action": "Gritarle",
+          "heroicPoints": 0,
+          "evilPoints": 1,
+          "item": "0"
+        },
+        {
+          "id": 3,
+          "action": "Decirle que podría ser un espíritu",
+          "heroicPoints": 0,
+          "evilPoints": 1,
+          "item": "0"
+        }
+      ]
+    },
+    {
+      "room": 102,
+      "name": "Familia Dominguez ",
+      "level": 1,
+      "problem": "mi perro se quedó atrapado en el baño",
+      "context": "Todo está desordenado",
+      "actions": [
+        {
+          "id": 1,
+          "action": "Romper la puerta",
+          "heroicPoints": 1,
+          "evilPoints": 0,
+          "item": "0"
+        },
+        {
+          "id": 2,
+          "action": "Decirles que no puedes ayudarlos",
+          "heroicPoints": 0,
+          "evilPoints": 1,
+          "item": "0"
+        },
+        {
+          "id": 3,
+          "action": "Decirle que podría ser un espíritu",
+          "heroicPoints": 0,
+          "evilPoints": 1,
+          "item": "0"
+        }
+      ]
+    },
+    {
+      "room": 103,
+      "name": "Lucíano",
+      "level": 1,
+      "problem": "mis ventanas están sonando mucho",
+      "context": "Todo está desordenado",
+      "actions": [
+        {
+          "id": 1,
+          "action": "Cerrar la ventana",
+          "heroicPoints": 1,
+          "evilPoints": 0,
+          "item": "0"
+        },
+        {
+          "id": 2,
+          "action": "Gritarle",
+          "heroicPoints": 0,
+          "evilPoints": 1,
+          "item": "0"
+        },
+        {
+          "id": 3,
+          "action": "Decirle que podría ser un espíritu",
+          "heroicPoints": 0,
+          "evilPoints": 1,
+          "item": "0"
+        }
+      ]
+    },
+    {
+      "room": 104,
+      "name": "Soren",
+      "level": 1,
+      "problem": "M cocína suena mucho",
+      "context": "Todo está desordenado",
+      "actions": [
+        {
+          "id": 1,
+          "action": "Cerrar la ventana",
+          "heroicPoints": 1,
+          "evilPoints": 0,
+          "item": "0"
+        },
+        {
+          "id": 2,
+          "action": "Gritarle",
+          "heroicPoints": 0,
+          "evilPoints": 1,
+          "item": "0"
+        },
+        {
+          "id": 3,
+          "action": "Decirle que podría ser un espíritu",
+          "heroicPoints": 0,
+          "evilPoints": 1,
+          "item": "0"
+        }
+      ]
+    }
+  ]}
