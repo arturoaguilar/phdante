@@ -2,13 +2,25 @@
   <ion-page>
     <ion-content :fullscreen="true">
       <div id="container">
+        <div id="levelProgressBar">
+          <div
+            id="levelBarStatus"
+            :style="{ width: level * levelProgressConverter + '%' }"
+          ></div>
+        </div>
+        <!-- Time Bar-->
+        <div id="progressBar">
+          <div
+            id="barStatus"
+            :style="{ width: timeLeft * timeConverter + '%' }"
+          ></div>
+        </div>
+        <!-- End Time bar-->
 
         <div v-show="screen == 1" id="calls" class="calls">
-            
-          <div class="countdown">{{ timeLeft }}</div>
-
+          <div class="calls-container"></div>
           <div
-            class="amswer"
+            class="call"
             @click="answerCall(call)"
             v-for="call in incomingCalls"
             :key="call.room"
@@ -16,29 +28,34 @@
             <span>{{ call.room }}</span>
             <span>{{ call.name }}</span>
           </div>
+<div class="player-stats">
+          <div class="stat">HERO: {{ heroicPoints }}</div>
+          <div class="stat">EVIL: {{ evilPoints }}</div>
+          <div class="stat">VIDA: {{ hp }}</div>
 
+</div>
+<button> Inventario </button>
 
-          <div>HERO: {{ heroicPoints }}</div>
-          <div>EVIL: {{ evilPoints }}</div>
-          <button @click="startTime()">Start</button>
-          <button @click="stopTime()">Stop</button>
-          <button @click="restartTime()">Restar</button>
         </div>
 
         <div v-show="screen == 2" class="selected-call">
           {{ selectedCall.room }}
           {{ selectedCall.name }}
 
-          <p class="call__context">
-            {{ selectedCall.context }}
-          </p>
-          <div
-            class="action"
-            @click="choseOption(action)"
-            v-for="action in selectedCall.actions"
-            :key="action.id"
-          >
-            {{ action.action }}
+          <div class="call__context">
+            <img :src="selectedCall.image" />
+            <p>{{ selectedCall.context }}</p>
+          </div>
+
+          <div class="actions-container">
+            <div
+              class="action"
+              @click="choseOption(action)"
+              v-for="action in selectedCall.actions"
+              :key="action.id"
+            >
+              {{ action.action }}
+            </div>
           </div>
         </div>
 
@@ -50,8 +67,12 @@
           <p>
             <b> {{ evilPointsEarned }}</b> puntos de maldad
           </p>
+          
           <button @click="screen = 1">Aceptar</button>
         </div>
+
+
+
       </div>
     </ion-content>
   </ion-page>
@@ -77,11 +98,15 @@ export default defineComponent({
       timeLeft: 10,
       timeInterval: "",
       level: 1,
+      levelProgressConverter: 10,
+      tiemLevelCount: 1,
+      timeConverter: 10,
       heroicPointsEarned: 0,
       evilPointsEarned: 0,
     });
 
     const pageName = ref("Jugando");
+
     const playerState = reactive({
       name: "Charlie",
       hp: 10,
@@ -112,11 +137,10 @@ export default defineComponent({
 
     (async () => {
       callState.calls = await getAllCalls();
-      callState.incomingCalls = getEnterCalls(); 
+      callState.incomingCalls = getEnterCalls();
       console.log("CALL STATE");
-        console.log(callState.incomingCalls);
+      console.log(callState.incomingCalls);
     })();
-
 
     function answerCall(call) {
       callState.selectedCall = call;
@@ -154,8 +178,19 @@ export default defineComponent({
       gameState.timeLeft = 10;
       // startTime();
     }
+
+    //progress bar logic
+
+    //elem.style.width = gameState.timeLeft + '%';
+    //==================
+
     watch(() => {
       if (gameState.timeLeft == 0) {
+        gameState.tiemLevelCount++;
+        if (gameState.tiemLevelCount==10){ 
+          gameState.level++;
+          gameState.tiemLevelCount=0;
+          }
         callState.incomingCalls = getEnterCalls();
         stopTime();
         restartTime();
@@ -165,12 +200,10 @@ export default defineComponent({
       }
     });
 
-console.log("Game State");
-    console.log(gameState);
-    console.log("Calls State");
-    console.log(callState);
-    console.log("Players State");
-    console.log(playerState);
+    stopTime();
+    restartTime();
+    startTime();
+
     return {
       ...toRefs(gameState),
       ...toRefs(callState),
@@ -186,12 +219,12 @@ console.log("Game State");
 });
 </script>
 <style scoped>
-.amswer {
+.calls-container {
+  display: flex;
+}
+.call {
   width: 100%;
   border: solid 1px;
-
-  padding-block: 10px;
-  margin-block: 10px;
   /*
   animation-duration: 3s;
   animation-name: slidein;
@@ -215,12 +248,48 @@ console.log("Game State");
 .action {
   width: 100%;
   border: solid 1px;
-  padding-block: 10px;
-  margin-block: 10px;
 }
 
 .call__context {
+  padding: 20px;
   border: solid 1px;
-  padding: 30px;
+}
+
+.actions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.player-stats{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+ 
+}
+
+#progressBar {
+  position: relative;
+  width: 100%;
+  height: 30px;
+  background-color: #ddd;
+}
+
+#barStatus {
+  position: absolute;
+  height: 100%;
+  background-color: #000;
+}
+
+#levelProgressBar {
+  position: relative;
+  width: 100%;
+  height: 30px;
+  background-color: #ddd;
+}
+
+#levelBarStatus {
+  position: absolute;
+  height: 100%;
+  background-color: rgb(243, 72, 72);
 }
 </style>

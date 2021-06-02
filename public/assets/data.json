@@ -1,7 +1,28 @@
-{      
-    "calls": [
+{
+  "calls": [
     {
+      "id": 1,
       "room": 101,
+      "image": "assets/images/characterGenProfile2.png",
+      "special": 0,
+      "requirements": [
+        {
+          "field": "heroicPoints",
+          "value": 0
+        },
+        {
+          "field": "evilPoints",
+          "value": 0
+        },
+        {
+          "field": "hp",
+          "value": 0
+        },
+        {
+          "field": "level",
+          "value": 0
+        }
+      ],
       "name": "Domitila",
       "level": 1,
       "problem": "mis ventanas están sonando mucho",
@@ -12,26 +33,50 @@
           "action": "Cerrar la ventana",
           "heroicPoints": 1,
           "evilPoints": 0,
-          "item": "0"
+          "item": "0",
+          "damage": 0
         },
         {
           "id": 2,
           "action": "Gritarle",
           "heroicPoints": 0,
           "evilPoints": 1,
-          "item": "0"
+          "item": "0",
+          "damage": 0
         },
         {
           "id": 3,
           "action": "Decirle que podría ser un espíritu",
           "heroicPoints": 0,
           "evilPoints": 1,
-          "item": "0"
+          "item": "0",
+          "damage": 0
         }
       ]
     },
     {
+      "id": 2,
       "room": 102,
+      "image": "assets/images/characterGenProfile.png",
+      "special": 0,
+      "requirements": [
+        {
+          "field": "heroicPoints",
+          "value": 0
+        },
+        {
+          "field": "evilPoints",
+          "value": 0
+        },
+        {
+          "field": "hp",
+          "value": 0
+        },
+        {
+          "field": "level",
+          "value": 0
+        }
+      ],
       "name": "Familia Dominguez ",
       "level": 1,
       "problem": "mi perro se quedó atrapado en el baño",
@@ -42,26 +87,50 @@
           "action": "Romper la puerta",
           "heroicPoints": 1,
           "evilPoints": 0,
-          "item": "0"
+          "item": "0",
+          "damage": 0
         },
         {
           "id": 2,
           "action": "Decirles que no puedes ayudarlos",
           "heroicPoints": 0,
           "evilPoints": 1,
-          "item": "0"
+          "item": "0",
+          "damage": 0
         },
         {
           "id": 3,
           "action": "Decirle que podría ser un espíritu",
           "heroicPoints": 0,
           "evilPoints": 1,
-          "item": "0"
+          "item": "0",
+          "damage": 0
         }
       ]
     },
     {
+      "id": 3,
       "room": 103,
+      "image": "assets/images/characterGenProfile2.png",
+      "special": 0,
+      "requirements": [
+        {
+          "field": "heroicPoints",
+          "value": 0
+        },
+        {
+          "field": "evilPoints",
+          "value": 0
+        },
+        {
+          "field": "hp",
+          "value": 0
+        },
+        {
+          "field": "level",
+          "value": 0
+        }
+      ],
       "name": "Lucíano",
       "level": 1,
       "problem": "mis ventanas están sonando mucho",
@@ -72,26 +141,50 @@
           "action": "Cerrar la ventana",
           "heroicPoints": 1,
           "evilPoints": 0,
-          "item": "0"
+          "item": "0",
+          "damage": 0
         },
         {
           "id": 2,
           "action": "Gritarle",
           "heroicPoints": 0,
           "evilPoints": 1,
-          "item": "0"
+          "item": "0",
+          "damage": 0
         },
         {
           "id": 3,
           "action": "Decirle que podría ser un espíritu",
           "heroicPoints": 0,
           "evilPoints": 1,
-          "item": "0"
+          "item": "0",
+          "damage": 0
         }
       ]
     },
     {
+      "id": 4,
       "room": 104,
+      "image": "assets/images/characterGenProfile.png",
+      "special": 0,
+      "requirements": [
+        {
+          "field": "heroicPoints",
+          "value": 0
+        },
+        {
+          "field": "evilPoints",
+          "value": 0
+        },
+        {
+          "field": "hp",
+          "value": 0
+        },
+        {
+          "field": "level",
+          "value": 0
+        }
+      ],
       "name": "Soren",
       "level": 1,
       "problem": "M cocína suena mucho",
@@ -102,22 +195,40 @@
           "action": "Cerrar la ventana",
           "heroicPoints": 1,
           "evilPoints": 0,
-          "item": "0"
+          "item": "0",
+          "damage": 0
         },
         {
           "id": 2,
           "action": "Gritarle",
           "heroicPoints": 0,
           "evilPoints": 1,
-          "item": "0"
+          "item": "0",
+          "damage": 0
         },
         {
           "id": 3,
           "action": "Decirle que podría ser un espíritu",
           "heroicPoints": 0,
           "evilPoints": 1,
-          "item": "0"
+          "item": "0",
+          "damage": 0
         }
       ]
     }
-  ]}
+  ],
+  "item": [
+    {
+      "id": 1,
+      "name": "Escoba"
+    },
+    {
+      "id": 2,
+      "name": "Botella con Agua"
+    },
+    {
+      "id": 3,
+      "name": "Espada"
+    }
+  ]
+}
