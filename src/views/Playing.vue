@@ -8,17 +8,21 @@
             :style="{ width: level * levelProgressConverter + '%' }"
           ></div>
         </div>
-        <!-- Time Bar-->
+        <div id="timeblock__progress-bar">
+          <div id="timeblock__status" :style="{ width: tiemLevelCount * 10 +'%'}">
+            
+          </div>
+        </div>
+
         <div id="progressBar">
           <div
             id="barStatus"
             :style="{ width: timeLeft * timeConverter + '%' }"
           ></div>
         </div>
-        <!-- End Time bar-->
 
         <div v-show="screen == 1" id="calls" class="calls">
-          <div class="calls-container"></div>
+          <div class="calls-container">
           <div
             class="call"
             @click="answerCall(call)"
@@ -28,13 +32,16 @@
             <span>{{ call.room }}</span>
             <span>{{ call.name }}</span>
           </div>
-<div class="player-stats">
-          <div class="stat">HERO: {{ heroicPoints }}</div>
-          <div class="stat">EVIL: {{ evilPoints }}</div>
-          <div class="stat">VIDA: {{ hp }}</div>
+          </div>
+<div class="footer">
+          <div class="player-stats">
+            <div class="stat">HERO: {{ heroicPoints }}</div>
+            <div class="stat">EVIL: {{ evilPoints }}</div>
+            <div class="stat">VIDA: {{ hp }}</div>
+          </div>
 
+          <button @click="screen = 4">Inventario</button>
 </div>
-<button> Inventario </button>
 
         </div>
 
@@ -61,18 +68,28 @@
 
         <div v-show="screen == 3">
           Ganaste:
+          <p v-show="itemsEarned.length > 0">
+            <span v-for="item in itemsEarned" :key="item.id">
+              {{ item.name }}
+            </span>
+          </p>
           <p>
             <b>{{ heroicPointsEarned }}</b> puntos heróicos
           </p>
           <p>
             <b> {{ evilPointsEarned }}</b> puntos de maldad
           </p>
-          
+
           <button @click="screen = 1">Aceptar</button>
         </div>
 
-
-
+        <div class="items-container" v-show="screen == 4">
+          <div v-show="items.length == 0">No tienes items</div>
+          <div class="item" v-for="item in items" :key="item.id">
+            {{ item.name }}
+          </div>
+          <button @click="screen = 1">Regresar</button>
+        </div>
       </div>
     </ion-content>
   </ion-page>
@@ -99,10 +116,11 @@ export default defineComponent({
       timeInterval: "",
       level: 1,
       levelProgressConverter: 10,
-      tiemLevelCount: 1,
+      tiemLevelCount: 0,
       timeConverter: 10,
       heroicPointsEarned: 0,
       evilPointsEarned: 0,
+      itemsEarned: [],
     });
 
     const pageName = ref("Jugando");
@@ -112,6 +130,8 @@ export default defineComponent({
       hp: 10,
       heroicPoints: 0,
       evilPoints: 0,
+      playerLevel: 1,
+      items: [],
     });
 
     const callState = reactive({
@@ -150,6 +170,12 @@ export default defineComponent({
     function choseOption(action) {
       gameState.heroicPointsEarned = action.heroicPoints;
       gameState.evilPointsEarned = action.evilPoints;
+      gameState.itemsEarned = action.prices;
+
+      action.prices.forEach((element) => {
+        playerState.items.push(element);
+      });
+
       playerState.heroicPoints = playerState.heroicPoints + action.heroicPoints;
       playerState.evilPoints = playerState.evilPoints + action.evilPoints;
       gameState.screen = 3;
@@ -187,10 +213,10 @@ export default defineComponent({
     watch(() => {
       if (gameState.timeLeft == 0) {
         gameState.tiemLevelCount++;
-        if (gameState.tiemLevelCount==10){ 
+        if (gameState.tiemLevelCount == 10) {
           gameState.level++;
-          gameState.tiemLevelCount=0;
-          }
+          gameState.tiemLevelCount = 0;
+        }
         callState.incomingCalls = getEnterCalls();
         stopTime();
         restartTime();
@@ -219,12 +245,20 @@ export default defineComponent({
 });
 </script>
 <style scoped>
+#container {
+  background-color: var(--primary);
+  color: var(--secondary);
+  height: 100vh;
+}
 .calls-container {
   display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 .call {
-  width: 100%;
+  /*width: 100%;*/
   border: solid 1px;
+  padding-block: 16px;
   /*
   animation-duration: 3s;
   animation-name: slidein;
@@ -260,11 +294,19 @@ export default defineComponent({
   flex-direction: column;
   gap: 20px;
 }
-.player-stats{
+.player-stats {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
- 
+
+}
+.footer{
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 #progressBar {
@@ -291,5 +333,23 @@ export default defineComponent({
   position: absolute;
   height: 100%;
   background-color: rgb(243, 72, 72);
+}
+
+#timeblock__progress-bar {
+  position: relative;
+  width: 100%;
+  height: 10px;
+  background-color: #ddd;
+}
+#timeblock__status {
+  position: absolute;
+  height: 100%;
+  background-color: rgb(37, 126, 241);
+}
+
+
+button {
+  padding-block: 16px;
+  font-size: 1.4rem;
 }
 </style>
