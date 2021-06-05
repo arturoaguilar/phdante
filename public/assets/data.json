@@ -1,4 +1,41 @@
 {
+  "finals":[
+    {
+      "final":1,
+      "finalTexts":[
+        {"order":1, "text":"Text 1","img":""},
+        {"order":2, "text":"Texto 2","img":""},
+        {"order":3, "text":"Texto 3","img":""}
+      ]
+    },
+    {
+      "final":2,
+      "finalTexts":[
+        {"order":1, "text":"Text 1","img":""},
+        {"order":2, "text":"Texto 2","img":""},
+        {"order":3, "text":"Texto 3","img":""}
+      ]
+    },
+    {
+      "final":3,
+      "finalTexts":[
+        {"order":1, "text":"Text 1","img":""},
+        {"order":2, "text":"Texto 2","img":""},
+        {"order":3, "text":"Texto 3","img":""}
+      ]
+    }
+  ]
+  ,
+  "levels": [
+    {
+      "level": 1,
+      "welcomeText": "Bienvenido a tu primer día, eres el único que aceptó el trabajo. El último conserje dijo que hoy era el día... Pero bueno no nos alarmamos. Nadie puede hubicarlo"
+    },
+    {
+      "level": 2,
+      "welcomeText": "Definitivamente algo está pasando en este edificio, ¿qué son esos hombres del techo?"
+    }
+  ],
   "calls": [
     {
       "id": 1,
@@ -35,27 +72,29 @@
           "evilPoints": 0,
           "item": "0",
           "damage": 0,
-          "ifHaveItemTypeCode":"",
-          "prices": [    {
-            "id": 1,
-            "typeCode":"meele",
-            "typeName":"Golpear",
-            "name": "Escoba",
-            "healPoints":0,
-            "attackPoints": 0,
-            "defendPoints": 0,
-            "magic":true
-          },
-          {
-            "id": 2,
-            "typeCode":"range",
-            "typeName":"Lanzar",
-            "name": "Botella con Agua",
-            "healPoints":0,
-            "attackPoints": 0,
-            "defendPoints": 0,
-            "magic":true
-          }]
+          "ifHaveItemTypeCode": "",
+          "prices": [
+            {
+              "id": 1,
+              "typeCode": "meele",
+              "typeName": "Golpear",
+              "name": "Escoba",
+              "healPoints": 0,
+              "attackPoints": 0,
+              "defendPoints": 0,
+              "magic": true
+            },
+            {
+              "id": 2,
+              "typeCode": "range",
+              "typeName": "Lanzar",
+              "name": "Botella con Agua",
+              "healPoints": 0,
+              "attackPoints": 0,
+              "defendPoints": 0,
+              "magic": true
+            }
+          ]
         },
         {
           "id": 2,
@@ -64,28 +103,29 @@
           "evilPoints": 1,
           "item": "0",
           "damage": 0,
-          "ifHaveItemTypeCode":"",
+          "ifHaveItemTypeCode": "",
           "prices": [
-          {
-            "id": 2,
-            "typeCode":"range",
-            "typeName":"Lanzar",
-            "name": "Botella con Agua",
-            "healPoints":0,
-            "attackPoints": 0,
-            "defendPoints": 0,
-            "magic":true
-          },
-          {
-            "id": 4,
-            "typeCode":"heal",
-            "typeName":"Cuerpo a cuerpo",
-            "healPoints":0,
-            "name": "Espada",
-            "attackPoints": 0,
-            "defendPoints": 0,
-            "magic":true
-          }]
+            {
+              "id": 2,
+              "typeCode": "range",
+              "typeName": "Lanzar",
+              "name": "Botella con Agua",
+              "healPoints": 0,
+              "attackPoints": 0,
+              "defendPoints": 0,
+              "magic": true
+            },
+            {
+              "id": 4,
+              "typeCode": "heal",
+              "typeName": "Cuerpo a cuerpo",
+              "healPoints": 0,
+              "name": "Espada",
+              "attackPoints": 0,
+              "defendPoints": 0,
+              "magic": true
+            }
+          ]
         },
         {
           "id": 3,
@@ -94,27 +134,29 @@
           "evilPoints": 1,
           "item": "0",
           "damage": 0,
-          "ifHaveItemTypeCode":"",
-          "prices": [    {
-            "id": 1,
-            "typeCode":"meele",
-            "typeName":"Golpear",
-            "name": "Escoba",
-            "healPoints":0,
-            "attackPoints": 0,
-            "defendPoints": 0,
-            "magic":true
-          },
-          {
-            "id": 4,
-            "typeCode":"heal",
-            "typeName":"Cuerpo a cuerpo",
-            "healPoints":0,
-            "name": "Espada",
-            "attackPoints": 0,
-            "defendPoints": 0,
-            "magic":true
-          }]
+          "ifHaveItemTypeCode": "",
+          "prices": [
+            {
+              "id": 1,
+              "typeCode": "meele",
+              "typeName": "Golpear",
+              "name": "Escoba",
+              "healPoints": 0,
+              "attackPoints": 0,
+              "defendPoints": 0,
+              "magic": true
+            },
+            {
+              "id": 4,
+              "typeCode": "heal",
+              "typeName": "Cuerpo a cuerpo",
+              "healPoints": 0,
+              "name": "Espada",
+              "attackPoints": 0,
+              "defendPoints": 0,
+              "magic": true
+            }
+          ]
         }
       ]
     },
@@ -153,27 +195,29 @@
           "evilPoints": 0,
           "item": "0",
           "damage": 0,
-          "ifHaveItemTypeCode":"",
-          "prices": [ {
-            "id": 1,
-            "typeCode":"meele",
-            "typeName":"Golpear",
-            "name": "Escoba",
-            "healPoints":0,
-            "attackPoints": 0,
-            "defendPoints": 0,
-            "magic":true
-          },
-          {
-            "id": 2,
-            "typeCode":"range",
-            "typeName":"Lanzar",
-            "name": "Botella con Agua",
-            "healPoints":0,
-            "attackPoints": 0,
-            "defendPoints": 0,
-            "magic":true
-          }]
+          "ifHaveItemTypeCode": "",
+          "prices": [
+            {
+              "id": 1,
+              "typeCode": "meele",
+              "typeName": "Golpear",
+              "name": "Escoba",
+              "healPoints": 0,
+              "attackPoints": 0,
+              "defendPoints": 0,
+              "magic": true
+            },
+            {
+              "id": 2,
+              "typeCode": "range",
+              "typeName": "Lanzar",
+              "name": "Botella con Agua",
+              "healPoints": 0,
+              "attackPoints": 0,
+              "defendPoints": 0,
+              "magic": true
+            }
+          ]
         },
         {
           "id": 2,
@@ -182,27 +226,29 @@
           "evilPoints": 1,
           "item": "0",
           "damage": 0,
-          "ifHaveItemTypeCode":"",
-          "prices": [ {
-            "id": 1,
-            "typeCode":"meele",
-            "typeName":"Golpear",
-            "name": "Escoba",
-            "healPoints":0,
-            "attackPoints": 0,
-            "defendPoints": 0,
-            "magic":true
-          },
-          {
-            "id": 2,
-            "typeCode":"range",
-            "typeName":"Lanzar",
-            "name": "Botella con Agua",
-            "healPoints":0,
-            "attackPoints": 0,
-            "defendPoints": 0,
-            "magic":true
-          }]
+          "ifHaveItemTypeCode": "",
+          "prices": [
+            {
+              "id": 1,
+              "typeCode": "meele",
+              "typeName": "Golpear",
+              "name": "Escoba",
+              "healPoints": 0,
+              "attackPoints": 0,
+              "defendPoints": 0,
+              "magic": true
+            },
+            {
+              "id": 2,
+              "typeCode": "range",
+              "typeName": "Lanzar",
+              "name": "Botella con Agua",
+              "healPoints": 0,
+              "attackPoints": 0,
+              "defendPoints": 0,
+              "magic": true
+            }
+          ]
         },
         {
           "id": 3,
@@ -211,27 +257,29 @@
           "evilPoints": 1,
           "item": "0",
           "damage": 0,
-          "ifHaveItemTypeCode":"",
-          "prices": [ {
-            "id": 1,
-            "typeCode":"meele",
-            "typeName":"Golpear",
-            "name": "Escoba",
-            "healPoints":0,
-            "attackPoints": 0,
-            "defendPoints": 0,
-            "magic":true
-          },
-          {
-            "id": 2,
-            "typeCode":"range",
-            "typeName":"Lanzar",
-            "name": "Botella con Agua",
-            "healPoints":0,
-            "attackPoints": 0,
-            "defendPoints": 0,
-            "magic":true
-          }]
+          "ifHaveItemTypeCode": "",
+          "prices": [
+            {
+              "id": 1,
+              "typeCode": "meele",
+              "typeName": "Golpear",
+              "name": "Escoba",
+              "healPoints": 0,
+              "attackPoints": 0,
+              "defendPoints": 0,
+              "magic": true
+            },
+            {
+              "id": 2,
+              "typeCode": "range",
+              "typeName": "Lanzar",
+              "name": "Botella con Agua",
+              "healPoints": 0,
+              "attackPoints": 0,
+              "defendPoints": 0,
+              "magic": true
+            }
+          ]
         }
       ]
     },
@@ -270,27 +318,29 @@
           "evilPoints": 0,
           "item": "0",
           "damage": 0,
-          "ifHaveItemTypeCode":"",
-          "prices": [ {
-            "id": 1,
-            "typeCode":"meele",
-            "typeName":"Golpear",
-            "name": "Escoba",
-            "healPoints":0,
-            "attackPoints": 0,
-            "defendPoints": 0,
-            "magic":true
-          },
-          {
-            "id": 2,
-            "typeCode":"range",
-            "typeName":"Lanzar",
-            "name": "Botella con Agua",
-            "healPoints":0,
-            "attackPoints": 0,
-            "defendPoints": 0,
-            "magic":true
-          }]
+          "ifHaveItemTypeCode": "",
+          "prices": [
+            {
+              "id": 1,
+              "typeCode": "meele",
+              "typeName": "Golpear",
+              "name": "Escoba",
+              "healPoints": 0,
+              "attackPoints": 0,
+              "defendPoints": 0,
+              "magic": true
+            },
+            {
+              "id": 2,
+              "typeCode": "range",
+              "typeName": "Lanzar",
+              "name": "Botella con Agua",
+              "healPoints": 0,
+              "attackPoints": 0,
+              "defendPoints": 0,
+              "magic": true
+            }
+          ]
         },
         {
           "id": 2,
@@ -299,27 +349,29 @@
           "evilPoints": 1,
           "item": "0",
           "damage": 0,
-          "ifHaveItemTypeCode":"",
-          "prices": [ {
-            "id": 1,
-            "typeCode":"meele",
-            "typeName":"Golpear",
-            "name": "Escoba",
-            "healPoints":0,
-            "attackPoints": 0,
-            "defendPoints": 0,
-            "magic":true
-          },
-          {
-            "id": 2,
-            "typeCode":"range",
-            "typeName":"Lanzar",
-            "name": "Botella con Agua",
-            "healPoints":0,
-            "attackPoints": 0,
-            "defendPoints": 0,
-            "magic":true
-          }]
+          "ifHaveItemTypeCode": "",
+          "prices": [
+            {
+              "id": 1,
+              "typeCode": "meele",
+              "typeName": "Golpear",
+              "name": "Escoba",
+              "healPoints": 0,
+              "attackPoints": 0,
+              "defendPoints": 0,
+              "magic": true
+            },
+            {
+              "id": 2,
+              "typeCode": "range",
+              "typeName": "Lanzar",
+              "name": "Botella con Agua",
+              "healPoints": 0,
+              "attackPoints": 0,
+              "defendPoints": 0,
+              "magic": true
+            }
+          ]
         },
         {
           "id": 3,
@@ -328,27 +380,29 @@
           "evilPoints": 1,
           "item": "0",
           "damage": 0,
-          "ifHaveItemTypeCode":"",
-          "prices": [ {
-            "id": 1,
-            "typeCode":"meele",
-            "typeName":"Golpear",
-            "name": "Escoba",
-            "healPoints":0,
-            "attackPoints": 0,
-            "defendPoints": 0,
-            "magic":true
-          },
-          {
-            "id": 2,
-            "typeCode":"range",
-            "typeName":"Lanzar",
-            "name": "Botella con Agua",
-            "healPoints":0,
-            "attackPoints": 0,
-            "defendPoints": 0,
-            "magic":true
-          }]
+          "ifHaveItemTypeCode": "",
+          "prices": [
+            {
+              "id": 1,
+              "typeCode": "meele",
+              "typeName": "Golpear",
+              "name": "Escoba",
+              "healPoints": 0,
+              "attackPoints": 0,
+              "defendPoints": 0,
+              "magic": true
+            },
+            {
+              "id": 2,
+              "typeCode": "range",
+              "typeName": "Lanzar",
+              "name": "Botella con Agua",
+              "healPoints": 0,
+              "attackPoints": 0,
+              "defendPoints": 0,
+              "magic": true
+            }
+          ]
         }
       ]
     },
@@ -387,27 +441,29 @@
           "evilPoints": 0,
           "item": "0",
           "damage": 0,
-          "ifHaveItemTypeCode":"",
-          "prices": [ {
-            "id": 1,
-            "typeCode":"meele",
-            "typeName":"Golpear",
-            "name": "Escoba",
-            "healPoints":0,
-            "attackPoints": 0,
-            "defendPoints": 0,
-            "magic":true
-          },
-          {
-            "id": 2,
-            "typeCode":"range",
-            "typeName":"Lanzar",
-            "name": "Botella con Agua",
-            "healPoints":0,
-            "attackPoints": 0,
-            "defendPoints": 0,
-            "magic":true
-          }]
+          "ifHaveItemTypeCode": "",
+          "prices": [
+            {
+              "id": 1,
+              "typeCode": "meele",
+              "typeName": "Golpear",
+              "name": "Escoba",
+              "healPoints": 0,
+              "attackPoints": 0,
+              "defendPoints": 0,
+              "magic": true
+            },
+            {
+              "id": 2,
+              "typeCode": "range",
+              "typeName": "Lanzar",
+              "name": "Botella con Agua",
+              "healPoints": 0,
+              "attackPoints": 0,
+              "defendPoints": 0,
+              "magic": true
+            }
+          ]
         },
         {
           "id": 2,
@@ -416,27 +472,29 @@
           "evilPoints": 1,
           "item": "0",
           "damage": 0,
-          "ifHaveItemTypeCode":"",
-          "prices": [ {
-            "id": 1,
-            "typeCode":"meele",
-            "typeName":"Golpear",
-            "name": "Escoba",
-            "healPoints":0,
-            "attackPoints": 0,
-            "defendPoints": 0,
-            "magic":true
-          },
-          {
-            "id": 2,
-            "typeCode":"range",
-            "typeName":"Lanzar",
-            "name": "Botella con Agua",
-            "healPoints":0,
-            "attackPoints": 0,
-            "defendPoints": 0,
-            "magic":true
-          }]
+          "ifHaveItemTypeCode": "",
+          "prices": [
+            {
+              "id": 1,
+              "typeCode": "meele",
+              "typeName": "Golpear",
+              "name": "Escoba",
+              "healPoints": 0,
+              "attackPoints": 0,
+              "defendPoints": 0,
+              "magic": true
+            },
+            {
+              "id": 2,
+              "typeCode": "range",
+              "typeName": "Lanzar",
+              "name": "Botella con Agua",
+              "healPoints": 0,
+              "attackPoints": 0,
+              "defendPoints": 0,
+              "magic": true
+            }
+          ]
         },
         {
           "id": 3,
@@ -445,27 +503,29 @@
           "evilPoints": 1,
           "item": "0",
           "damage": 0,
-          "ifHaveItemTypeCode":0,
-          "prices": [ {
-            "id": 1,
-            "typeCode":"meele",
-            "typeName":"Golpear",
-            "name": "Escoba",
-            "healPoints":0,
-            "attackPoints": 0,
-            "defendPoints": 0,
-            "magic":true
-          },
-          {
-            "id": 2,
-            "typeCode":"range",
-            "typeName":"Lanzar",
-            "name": "Botella con Agua",
-            "healPoints":0,
-            "attackPoints": 0,
-            "defendPoints": 0,
-            "magic":true
-          }]
+          "ifHaveItemTypeCode": 0,
+          "prices": [
+            {
+              "id": 1,
+              "typeCode": "meele",
+              "typeName": "Golpear",
+              "name": "Escoba",
+              "healPoints": 0,
+              "attackPoints": 0,
+              "defendPoints": 0,
+              "magic": true
+            },
+            {
+              "id": 2,
+              "typeCode": "range",
+              "typeName": "Lanzar",
+              "name": "Botella con Agua",
+              "healPoints": 0,
+              "attackPoints": 0,
+              "defendPoints": 0,
+              "magic": true
+            }
+          ]
         }
       ]
     }
@@ -473,43 +533,43 @@
   "item": [
     {
       "id": 1,
-      "typeCode":"meele",
-      "typeName":"Golpear",
+      "typeCode": "meele",
+      "typeName": "Golpear",
       "name": "Escoba",
-      "healPoints":0,
+      "healPoints": 0,
       "attackPoints": 0,
       "defendPoints": 0,
-      "magic":true
+      "magic": true
     },
     {
       "id": 2,
-      "typeCode":"range",
-      "typeName":"Lanzar",
+      "typeCode": "range",
+      "typeName": "Lanzar",
       "name": "Botella con Agua",
-      "healPoints":0,
+      "healPoints": 0,
       "attackPoints": 0,
       "defendPoints": 0,
-      "magic":true
+      "magic": true
     },
     {
       "id": 3,
-      "typeCode":"meele",
-      "typeName":"Cuerpo a cuerpo",
-      "healPoints":0,
+      "typeCode": "meele",
+      "typeName": "Cuerpo a cuerpo",
+      "healPoints": 0,
       "name": "Espada",
       "attackPoints": 0,
       "defendPoints": 0,
-      "magic":true
+      "magic": true
     },
     {
       "id": 4,
-      "typeCode":"heal",
-      "typeName":"Cuerpo a cuerpo",
-      "healPoints":0,
+      "typeCode": "heal",
+      "typeName": "Cuerpo a cuerpo",
+      "healPoints": 0,
       "name": "Espada",
       "attackPoints": 0,
       "defendPoints": 0,
-      "magic":true
+      "magic": true
     }
   ]
 }

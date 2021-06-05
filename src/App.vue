@@ -18,8 +18,8 @@ export default defineComponent({
 </script>
 <style>
 :root {
-  --primary: #000;
-  --secondary: #fff;
-  --contrast: #fff;
+  --primary: #272727;
+  --secondary: #fefeff;
+  --contrast: #fefeff;
 }
 </style>

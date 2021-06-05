@@ -1,55 +1,76 @@
 <template>
   <ion-page>
     <ion-content :fullscreen="true">
-      <div id="container">
-        <div id="levelProgressBar">
-          <div
-            id="levelBarStatus"
-            :style="{ width: level * levelProgressConverter + '%' }"
-          ></div>
-        </div>
-        <div id="timeblock__progress-bar">
-          <div id="timeblock__status" :style="{ width: tiemLevelCount * 10 +'%'}">
-            
+      <div v-show="end" class="container">Se terminó
+
+        <button @click="goToHomePage()">Reiniciar </button>
+      </div>
+
+      <div v-show="!end" class="container">
+        <div class="player-stats">
+          <div class="stat">
+            Heró
+            <p>{{ heroicPoints }}</p>
+          </div>
+          <div class="stat">
+            Mald
+            <p>{{ evilPoints }}</p>
+          </div>
+          <div class="stat">
+            Vida
+            <p>{{ hp }}</p>
           </div>
         </div>
 
-        <div id="progressBar">
-          <div
-            id="barStatus"
-            :style="{ width: timeLeft * timeConverter + '%' }"
-          ></div>
+        <div v-show="screen == 0" class="level">
+          <p>sasdasdad</p>
+          <button @click="screen = 1">Continuar</button>
         </div>
 
         <div v-show="screen == 1" id="calls" class="calls">
+          <!-- STATS---->
+          <div id="levelProgressBar">
+            <div
+              id="levelBarStatus"
+              :style="{ width: level * levelProgressConverter + '%' }"
+            ></div>
+          </div>
+          <div id="timeblock__progress-bar">
+            <div
+              id="timeblock__status"
+              :style="{ width: tiemLevelCount * 10 + '%' }"
+            ></div>
+          </div>
+
+          <div id="progressBar">
+            <div
+              id="barStatus"
+              :style="{ width: timeLeft * timeConverter + '%' }"
+            ></div>
+          </div>
+
+          <!--- FIN STAtS -->
+
           <div class="calls-container">
-          <div
-            class="call"
-            @click="answerCall(call)"
-            v-for="call in incomingCalls"
-            :key="call.room"
-          >
-            <span>{{ call.room }}</span>
-            <span>{{ call.name }}</span>
+            <div
+              class="call"
+              @click="answerCall(call)"
+              v-for="call in incomingCalls"
+              :key="call.room"
+            >
+              <span>{{ call.room }}</span>
+              <span>{{ call.name }}</span>
+            </div>
           </div>
+          <div class="footer">
+            <button @click="screen = 4">Inventario</button>
           </div>
-<div class="footer">
-          <div class="player-stats">
-            <div class="stat">HERO: {{ heroicPoints }}</div>
-            <div class="stat">EVIL: {{ evilPoints }}</div>
-            <div class="stat">VIDA: {{ hp }}</div>
-          </div>
-
-          <button @click="screen = 4">Inventario</button>
-</div>
-
         </div>
 
         <div v-show="screen == 2" class="selected-call">
-          {{ selectedCall.room }}
-          {{ selectedCall.name }}
-
           <div class="call__context">
+            {{ selectedCall.room }} -
+            {{ selectedCall.name }}
             <img :src="selectedCall.image" />
             <p>{{ selectedCall.context }}</p>
           </div>
@@ -90,6 +111,16 @@
           </div>
           <button @click="screen = 1">Regresar</button>
         </div>
+
+        <div v-show="screen == 5">
+          <p>PArece que todo sigue su curso en lagunar roja</p>
+          <button @click="startLevel">Continuar</button>
+        </div>
+
+        <div v-show="screen == 6">
+          <p>Juego terminado</p>
+          <p>Felicitaciones, pudiste terminar.</p>
+        </div>
       </div>
     </ion-content>
   </ion-page>
@@ -100,6 +131,7 @@ import { ref, toRefs, reactive } from "@vue/reactivity";
 import { defineComponent } from "vue";
 import { watch } from "@vue/runtime-core";
 import axios from "axios";
+import {useRouter} from "vue-router";
 export default defineComponent({
   name: "Playing",
   components: {
@@ -107,6 +139,7 @@ export default defineComponent({
     IonPage,
   },
   setup() {
+    const router = useRouter();
     const gameState = reactive({
       playing: true,
       end: false,
@@ -115,11 +148,14 @@ export default defineComponent({
       timeLeft: 10,
       timeInterval: "",
       level: 1,
+      levelText: "",
+      endLevel: 3,
       levelProgressConverter: 10,
       tiemLevelCount: 0,
       timeConverter: 10,
       heroicPointsEarned: 0,
       evilPointsEarned: 0,
+
       itemsEarned: [],
     });
 
@@ -200,57 +236,74 @@ export default defineComponent({
     }
 
     function restartTime() {
-      //  stopTime();
       gameState.timeLeft = 10;
-      // startTime();
     }
 
-    //progress bar logic
-
-    //elem.style.width = gameState.timeLeft + '%';
-    //==================
-
+function goToHomePage(){
+  router.push('/home');
+}
     watch(() => {
       if (gameState.timeLeft == 0) {
         gameState.tiemLevelCount++;
-        if (gameState.tiemLevelCount == 10) {
+
+        if (gameState.tiemLevelCount == 10 && gameState.level< gameState.endLevel-1) {    
+          
           gameState.level++;
           gameState.tiemLevelCount = 0;
+          stopTime();
+          gameState.screen = 5;
+        
+        
+        }else if(gameState.tiemLevelCount == 10 && gameState.level == gameState.endLevel-1) {
+         gameState.end = true;
+
+        } else {
+          callState.incomingCalls = getEnterCalls();
+          stopTime();
+          restartTime();
+          startTime();
         }
-        callState.incomingCalls = getEnterCalls();
-        stopTime();
-        restartTime();
-        startTime();
-      } else {
-        console.log(gameState.timeLeft);
       }
+
     });
 
     stopTime();
     restartTime();
     startTime();
 
+    function startLevel() {
+      gameState.screen = 1;
+      callState.incomingCalls = getEnterCalls();
+      stopTime();
+      restartTime();
+      startTime();
+    }
+
     return {
       ...toRefs(gameState),
       ...toRefs(callState),
       ...toRefs(playerState),
+      startLevel,
       restartTime,
       pageName,
       choseOption,
       answerCall,
       startTime,
       stopTime,
+      goToHomePage
     };
   },
 });
 </script>
 <style scoped>
-#container {
+.container {
   background-color: var(--primary);
   color: var(--secondary);
   height: 100vh;
 }
 .calls-container {
+  padding-inline: 8px;
+  margin-block-start: 16px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -282,11 +335,13 @@ export default defineComponent({
 .action {
   width: 100%;
   border: solid 1px;
+  padding-block: 16px;
 }
 
 .call__context {
   padding: 20px;
   border: solid 1px;
+  margin-block-end: 16px;
 }
 
 .actions-container {
@@ -298,9 +353,19 @@ export default defineComponent({
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
+  border: solid 1px var(--secondary);
+  margin-block-end: 16px;
 }
-.footer{
+.player-stats :nth-child(2) {
+  border-right: solid 1px var(--secondary);
+  border-left: solid 1px var(--secondary);
+}
+.stat {
+  padding-inline: 16px;
+  text-align: center;
+  flex-grow: 1;
+}
+.footer {
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -347,9 +412,11 @@ export default defineComponent({
   background-color: rgb(37, 126, 241);
 }
 
-
 button {
   padding-block: 16px;
   font-size: 1.4rem;
+  background-color: var(--primary);
+  color: var(--secondary);
+  border: solid 1px var(--secondary);
 }
 </style>
