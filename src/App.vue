@@ -21,5 +21,10 @@ export default defineComponent({
   --primary: #272727;
   --secondary: #fefeff;
   --contrast: #fefeff;
+  --prueba:#60e5e2;
+  --prueba2:#c10d17;
+
+
+
 }
 </style>
