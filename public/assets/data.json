@@ -68,6 +68,7 @@
         {
           "id": 1,
           "action": "Cerrar la ventana",
+          "iscombat":0,
           "heroicPoints": 1,
           "evilPoints": 0,
           "item": "0",
@@ -99,6 +100,7 @@
         {
           "id": 2,
           "action": "Gritarle",
+          "iscombat":0,
           "heroicPoints": 0,
           "evilPoints": 1,
           "item": "0",
@@ -130,6 +132,7 @@
         {
           "id": 3,
           "action": "Decirle que podría ser un espíritu",
+          "iscombat":0,
           "heroicPoints": 0,
           "evilPoints": 1,
           "item": "0",
@@ -191,6 +194,7 @@
         {
           "id": 1,
           "action": "Romper la puerta",
+          "iscombat":0,
           "heroicPoints": 1,
           "evilPoints": 0,
           "item": "0",
@@ -222,6 +226,7 @@
         {
           "id": 2,
           "action": "Decirles que no puedes ayudarlos",
+          "iscombat":0,
           "heroicPoints": 0,
           "evilPoints": 1,
           "item": "0",
@@ -253,6 +258,7 @@
         {
           "id": 3,
           "action": "Decirle que podría ser un espíritu",
+          "iscombat":0,
           "heroicPoints": 0,
           "evilPoints": 1,
           "item": "0",
@@ -314,6 +320,7 @@
         {
           "id": 1,
           "action": "Cerrar la ventana",
+          "iscombat":0,
           "heroicPoints": 1,
           "evilPoints": 0,
           "item": "0",
@@ -345,6 +352,7 @@
         {
           "id": 2,
           "action": "Gritarle",
+          "iscombat":0,
           "heroicPoints": 0,
           "evilPoints": 1,
           "item": "0",
@@ -376,6 +384,7 @@
         {
           "id": 3,
           "action": "Decirle que podría ser un espíritu",
+          "iscombat":0,
           "heroicPoints": 0,
           "evilPoints": 1,
           "item": "0",
@@ -437,6 +446,7 @@
         {
           "id": 1,
           "action": "Cerrar la ventana",
+          "iscombat":0,
           "heroicPoints": 1,
           "evilPoints": 0,
           "item": "0",
@@ -468,6 +478,7 @@
         {
           "id": 2,
           "action": "Gritarle",
+          "iscombat":0,
           "heroicPoints": 0,
           "evilPoints": 1,
           "item": "0",
@@ -499,6 +510,7 @@
         {
           "id": 3,
           "action": "Decirle que podría ser un espíritu",
+          "iscombat":0,
           "heroicPoints": 0,
           "evilPoints": 1,
           "item": "0",

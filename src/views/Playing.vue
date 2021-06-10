@@ -1,9 +1,10 @@
 <template>
   <ion-page>
     <ion-content :fullscreen="true">
-      <div v-show="end" class="container">Se terminó
-
-        <button @click="goToHomePage()">Reiniciar </button>
+      <div v-show="end" class="container">
+        Se terminó
+  <button @click="endGame"> End game </button>
+        <!--<button @click="goToHomePage()">Reiniciar</button>-->
       </div>
 
       <div v-show="!end" class="container">
@@ -120,10 +121,34 @@
         <div v-show="screen == 6">
           <p>Juego terminado</p>
           <p>Felicitaciones, pudiste terminar.</p>
+        
         </div>
       </div>
+
+
+ <!-- Modal -->
+
+  <div id="endModal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <h1>Hola </h1>
+      <h1> Gracias por disfrutar de este juego</h1>
+    </div>
+    <button
+      @click="closeEndModal()"
+      class="modal-close is-large"
+      aria-label="close"
+    ></button>
+  </div>
+ <!-- End Modal -->
+
+
+
     </ion-content>
   </ion-page>
+
+ 
+
 </template>
 <script>
 import { IonContent, IonPage } from "@ionic/vue";
@@ -131,7 +156,7 @@ import { ref, toRefs, reactive } from "@vue/reactivity";
 import { defineComponent } from "vue";
 import { watch } from "@vue/runtime-core";
 import axios from "axios";
-import {useRouter} from "vue-router";
+import { useRouter } from "vue-router";
 export default defineComponent({
   name: "Playing",
   components: {
@@ -149,13 +174,12 @@ export default defineComponent({
       timeInterval: "",
       level: 1,
       levelText: "",
-      endLevel: 3,
+      endLevel: 2,
       levelProgressConverter: 10,
       tiemLevelCount: 0,
       timeConverter: 10,
       heroicPointsEarned: 0,
       evilPointsEarned: 0,
-
       itemsEarned: [],
     });
 
@@ -239,24 +263,39 @@ export default defineComponent({
       gameState.timeLeft = 10;
     }
 
-function goToHomePage(){
-  router.push('/home');
-}
+    function goToHomePage() {
+      router.push("/home");
+    }
+
+    /* Playing with modals  */
+    function closeEndModal() {
+      const element = document.getElementById("endModal");
+      element.classList.remove("is-active");
+    }
+    function endGame() {
+      const element = document.getElementById("endModal");
+      element.classList.add("is-active");
+    }
+
+    /* End of playing with modals*/
+
     watch(() => {
       if (gameState.timeLeft == 0) {
         gameState.tiemLevelCount++;
 
-        if (gameState.tiemLevelCount == 10 && gameState.level< gameState.endLevel-1) {    
-          
+        if (
+          gameState.tiemLevelCount == 10 &&
+          gameState.level < gameState.endLevel - 1
+        ) {
           gameState.level++;
           gameState.tiemLevelCount = 0;
           stopTime();
           gameState.screen = 5;
-        
-        
-        }else if(gameState.tiemLevelCount == 10 && gameState.level == gameState.endLevel-1) {
-         gameState.end = true;
-
+        } else if (
+          gameState.tiemLevelCount == 10 &&
+          gameState.level == gameState.endLevel - 1
+        ) {
+          gameState.end = true;
         } else {
           callState.incomingCalls = getEnterCalls();
           stopTime();
@@ -264,7 +303,6 @@ function goToHomePage(){
           startTime();
         }
       }
-
     });
 
     stopTime();
@@ -290,7 +328,9 @@ function goToHomePage(){
       answerCall,
       startTime,
       stopTime,
-      goToHomePage
+      goToHomePage,
+      closeEndModal,
+      endGame
     };
   },
 });
