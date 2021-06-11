@@ -107,7 +107,7 @@
 
         <div class="items-container" v-show="screen == 4">
           <div v-show="items.length == 0">No tienes items</div>
-          <div class="item" v-for="item in items" :key="item.id">
+          <div @click="getItemDetail(item)" class="item" v-for="item in items" :key="item.id">
             {{ item.name }}
           </div>
           <button @click="screen = 1">Regresar</button>
@@ -122,6 +122,11 @@
           <p>Juego terminado</p>
           <p>Felicitaciones, pudiste terminar.</p>
         
+        </div>
+        <div v-show="screen ==7">
+<h1>¡COMBATE!</h1>
+<button>Atacar</button>
+<button>huir</button>
         </div>
       </div>
 
@@ -188,6 +193,11 @@ export default defineComponent({
     const playerState = reactive({
       name: "Charlie",
       hp: 10,
+      xp:0,
+      dexterity:1,
+      armor:0,
+      attack:[1,3],
+      damage:[1,2],
       heroicPoints: 0,
       evilPoints: 0,
       playerLevel: 1,
@@ -201,6 +211,12 @@ export default defineComponent({
       calls: [],
       /* Fin de las llamadas */
     });
+
+    const combatState = reactive({
+      
+    });
+
+
 
     async function getAllCalls() {
       try {
@@ -228,6 +244,7 @@ export default defineComponent({
     }
 
     function choseOption(action) {
+if(!action.iscombat){
       gameState.heroicPointsEarned = action.heroicPoints;
       gameState.evilPointsEarned = action.evilPoints;
       gameState.itemsEarned = action.prices;
@@ -239,6 +256,10 @@ export default defineComponent({
       playerState.heroicPoints = playerState.heroicPoints + action.heroicPoints;
       playerState.evilPoints = playerState.evilPoints + action.evilPoints;
       gameState.screen = 3;
+
+}else{
+     gameState.screen =7;
+}
     }
 
     function getTime() {
@@ -267,6 +288,9 @@ export default defineComponent({
       router.push("/home");
     }
 
+   function getItemDetail(item){
+       console.log(item.name);
+   }
     /* Playing with modals  */
     function closeEndModal() {
       const element = document.getElementById("endModal");
