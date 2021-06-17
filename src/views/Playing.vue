@@ -3,7 +3,7 @@
     <ion-content :fullscreen="true">
       <div v-show="end" class="container">
         Se terminó
-  <button @click="endGame"> End game </button>
+        <button @click="endGame">End game</button>
         <!--<button @click="goToHomePage()">Reiniciar</button>-->
       </div>
 
@@ -107,53 +107,81 @@
 
         <div class="items-container" v-show="screen == 4">
           <div v-show="items.length == 0">No tienes items</div>
-          <div @click="getItemDetail(item)" class="item" v-for="item in items" :key="item.id">
+          <div
+            @click="getItemDetail(item)"
+            class="item"
+            v-for="item in items"
+            :key="item.id"
+          >
             {{ item.name }}
           </div>
           <button @click="screen = 1">Regresar</button>
         </div>
 
         <div v-show="screen == 5">
-          <p>PArece que todo sigue su curso en lagunar roja</p>
+          <p>Parece que todo sigue su curso en lagunar roja</p>
           <button @click="startLevel">Continuar</button>
         </div>
 
         <div v-show="screen == 6">
           <p>Juego terminado</p>
           <p>Felicitaciones, pudiste terminar.</p>
-        
         </div>
-        <div v-show="screen ==7">
-<h1>¡COMBATE!</h1>
-<button>Atacar</button>
-<button>huir</button>
+
+        <div v-show="screen == 7">
+          <h1>¡COMBATE!</h1>
+          <div v-for="(enemy, index) in enemies" :key="index">
+            <h2>Name: {{ enemy.name }}</h2>
+            <h2>HP: {{ enemy.hp }}</h2>
+          </div>
+          <ul>
+            <li v-for="(log, index) in fightLogs" :key="index">
+              {{ log }}
+            </li>
+          </ul>
+
+          <div v-show="fightEnd">
+            <button>Volver</button>
+          </div>
+
+          <div v-show="!fightEnd">
+            <button @click="fight(enemies)">Atacar</button>
+            <button>huir</button>
+          </div>
         </div>
       </div>
 
+      <!-- Modal -->
 
- <!-- Modal -->
+      <div id="endModal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content" style="background-color: #fff">
+          <h1>Hola</h1>
+          <h1>Gracias por disfrutar de este juego</h1>
+        </div>
+        <button
+          @click="closeEndModal()"
+          class="modal-close is-large"
+          aria-label="close"
+        ></button>
+      </div>
+      -->
 
-  <div id="endModal" class="modal">
-    <div class="modal-background"></div>
-    <div class="modal-content">
-      <h1>Hola </h1>
-      <h1> Gracias por disfrutar de este juego</h1>
-    </div>
-    <button
-      @click="closeEndModal()"
-      class="modal-close is-large"
-      aria-label="close"
-    ></button>
-  </div>
- <!-- End Modal -->
+      <div id="itemModal" class="modal">
+        <div class="modal-background"></div>
 
-
-
+        <div class="modal-content">
+          <div class="box">
+            <div style="background-color: white">
+              <p id="itemName"></p>
+              <p id="itemDescription"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Modal -->
     </ion-content>
   </ion-page>
-
- 
-
 </template>
 <script>
 import { IonContent, IonPage } from "@ionic/vue";
@@ -193,11 +221,11 @@ export default defineComponent({
     const playerState = reactive({
       name: "Charlie",
       hp: 10,
-      xp:0,
-      dexterity:1,
-      armor:0,
-      attack:[1,3],
-      damage:[1,2],
+      xp: 0,
+      dexterity: 1,
+      armor: 0,
+      attack: [1, 3],
+      damage: [1, 2],
       heroicPoints: 0,
       evilPoints: 0,
       playerLevel: 1,
@@ -212,11 +240,38 @@ export default defineComponent({
       /* Fin de las llamadas */
     });
 
-    const combatState = reactive({
-      
+    const itemState = reactive({
+      itemSelectedName: "",
+      itemSelectedDescrition: "",
     });
 
+    const fightState = reactive({
+      enemies: [],
+      fightEnd: false,
+      userWin: false,
+      fightLogs: [],
+    });
 
+    function getTime() {
+      gameState.timeInterval = setInterval(() => {
+        if (gameState.timeLeft === 0) {
+          clearInterval(gameState.timeInterval);
+        } else {
+          gameState.timeLeft--;
+        }
+      }, 1000);
+    }
+
+    function startTime() {
+      getTime();
+    }
+    function stopTime() {
+      clearInterval(gameState.timeInterval);
+    }
+
+    function restartTime() {
+      gameState.timeLeft = 10;
+    }
 
     async function getAllCalls() {
       try {
@@ -239,58 +294,116 @@ export default defineComponent({
     })();
 
     function answerCall(call) {
+      stopTime();
       callState.selectedCall = call;
       gameState.screen = 2;
     }
 
     function choseOption(action) {
-if(!action.iscombat){
-      gameState.heroicPointsEarned = action.heroicPoints;
-      gameState.evilPointsEarned = action.evilPoints;
-      gameState.itemsEarned = action.prices;
+      if (!action.iscombat) {
+        startTime();
+        gameState.heroicPointsEarned = action.heroicPoints;
+        gameState.evilPointsEarned = action.evilPoints;
+        gameState.itemsEarned = action.prices;
 
-      action.prices.forEach((element) => {
-        playerState.items.push(element);
-      });
+        action.prices.forEach((element) => {
+          playerState.items.push(element);
+        });
 
-      playerState.heroicPoints = playerState.heroicPoints + action.heroicPoints;
-      playerState.evilPoints = playerState.evilPoints + action.evilPoints;
-      gameState.screen = 3;
-
-}else{
-     gameState.screen =7;
-}
-    }
-
-    function getTime() {
-      gameState.timeInterval = setInterval(() => {
-        if (gameState.timeLeft === 0) {
-          clearInterval(gameState.timeInterval);
-        } else {
-          gameState.timeLeft--;
-        }
-      }, 1000);
-    }
-
-    function startTime() {
-      // console.log(gameState.timeInterval);
-      getTime();
-    }
-    function stopTime() {
-      clearInterval(gameState.timeInterval);
-    }
-
-    function restartTime() {
-      gameState.timeLeft = 10;
+        playerState.heroicPoints =
+          playerState.heroicPoints + action.heroicPoints;
+        playerState.evilPoints = playerState.evilPoints + action.evilPoints;
+        gameState.screen = 3;
+      } else {
+        fightState.fightEnd = false;
+        gameState.screen = 7;
+        fightState.enemies = action.enemies;
+      }
     }
 
     function goToHomePage() {
       router.push("/home");
     }
 
-   function getItemDetail(item){
-       console.log(item.name);
-   }
+    function getDiceResult(min, max) {
+      return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    function getPlayerCombatInitiative(enemy) {
+      return playerState.dexterity > enemy.dexterity ? true : false;
+    }
+
+    function execCombatAction(enemy, playerTurn) {
+      let combatLog = "";
+      if (playerTurn) {
+        const AttackRoll = getDiceResult(
+          playerState.attack[0],
+          playerState.attack[1]
+        );
+        if (AttackRoll > enemy.armor) {
+          const damageRoll = getDiceResult(
+            playerState.damage[0],
+            playerState.damage[1]
+          );
+          enemy.hp = enemy.hp - damageRoll;
+          if (enemy.hp > 0) {
+            combatLog = `Tu ataque fue exitoso. Hiciste ${damageRoll}`;
+          } else {
+            combatLog = `Hiciste ${damageRoll} ¡Ganaste!`;
+            fightState.fightEnd = true;
+          }
+
+          return combatLog;
+        } else {
+          combatLog = `Tu ataque Falló `;
+          return combatLog;
+        }
+      } else {
+        const AttackRoll = getDiceResult(enemy.attack[0], enemy.attack[1]);
+        if (AttackRoll > playerState.armor) {
+          const damageRoll = getDiceResult(enemy.damage[0], enemy.damage[1]);
+          playerState.hp -= damageRoll;
+          combatLog = `El ataque de ${enemy.name} fue exitoso. The hizo ${damageRoll}`;
+          return combatLog;
+        } else {
+          combatLog = `El ataque de ${enemy.name} falló`;
+          return combatLog;
+        }
+      }
+    }
+
+    function fight(enemies) {
+      enemies.forEach(function (element) {
+        let isPlayerTurn = getPlayerCombatInitiative(element);
+        const actionsNumber = 2;
+
+        for (let index = 0; index < actionsNumber; index++) {
+          fightState.fightLogs.push(execCombatAction(element, isPlayerTurn));
+          isPlayerTurn = !isPlayerTurn;
+        }
+      });
+    }
+
+   /* function changeWindow(type){
+switch (type) {
+  case 1:
+    break;
+
+  default:
+    break;
+}
+    }*/
+
+    function getItemDetail(item) {
+      const t = document.getElementById("itemName");
+      const y = document.createTextNode(item.name);
+      t.appendChild(y);
+      const element = document.getElementById("itemModal");
+      element.classList.add("is-active");
+
+      /*
+      itemState.itemSelectedName = item.name;*/
+    }
     /* Playing with modals  */
     function closeEndModal() {
       const element = document.getElementById("endModal");
@@ -345,6 +458,8 @@ if(!action.iscombat){
       ...toRefs(gameState),
       ...toRefs(callState),
       ...toRefs(playerState),
+      ...toRefs(itemState),
+      ...toRefs(fightState),
       startLevel,
       restartTime,
       pageName,
@@ -354,7 +469,9 @@ if(!action.iscombat){
       stopTime,
       goToHomePage,
       closeEndModal,
-      endGame
+      endGame,
+      getItemDetail,
+      fight,
     };
   },
 });

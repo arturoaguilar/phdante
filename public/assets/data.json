@@ -79,7 +79,7 @@
                "dexterity":3,
                "magic":0,
                "armor":1,
-               "damage":1
+               "damage":[1,2]
              }
           ],
           "heroicPoints": 1,
