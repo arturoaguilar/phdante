@@ -10,11 +10,11 @@
       <div v-show="!end" class="container">
         <div class="player-stats">
           <div class="stat">
-            Heró
+            heroísmo
             <p>{{ heroicPoints }}</p>
           </div>
           <div class="stat">
-            Mald
+            Maldad
             <p>{{ evilPoints }}</p>
           </div>
           <div class="stat">
@@ -73,7 +73,9 @@
             {{ selectedCall.room }} -
             {{ selectedCall.name }}
             <img :src="selectedCall.image" />
+            <p>{{ selectedCall.problem }}</p>
             <p>{{ selectedCall.context }}</p>
+             
           </div>
 
           <div class="actions-container">
@@ -207,7 +209,7 @@ export default defineComponent({
       timeInterval: "",
       level: 1,
       levelText: "",
-      endLevel: 2,
+      endLevel: 10,
       levelProgressConverter: 10,
       tiemLevelCount: 0,
       timeConverter: 10,

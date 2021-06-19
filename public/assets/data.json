@@ -60,14 +60,14 @@
           "value": 0
         }
       ],
-      "name": "Domitila",
+      "name": "Sra Domitila",
       "level": 1,
-      "problem": "mis ventanas están sonando mucho",
-      "context": "Todo está desordenado",
+      "problem": "Sra Domitila: mis ventanas están sonando mucho, no sé qué es, ¿pero podrías ayudarme?",
+      "context": "Desde afuera se ve una gran sombra y al acercarte por la ventana te das cuenta que es una araña del tamaño de un perro",
       "actions": [
         {
           "id": 1,
-          "action": "Cerrar la ventana",
+          "action": "Golpear a la gran araña desde el balcón",
           "iscombat":true,
           "enemies":[
              {

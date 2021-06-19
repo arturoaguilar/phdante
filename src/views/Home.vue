@@ -12,6 +12,7 @@
       </ion-header>
 
       <div id="container">
+        <img :src="HomeImage" />
         <p>{{ welcomeParagraph }}</p>
         <button @click="begin()" class="button--begin">¡Comenzar!</button>
       </div>
@@ -36,11 +37,13 @@ export default defineComponent({
     const welcomeParagraph = ref(
       "Bienvenido a PH Dante, un edificio que queda en la peculiar ciudad de Laguna Roja."
     );
+    const HomeImage = ref('assets/images/characterGenProfile.png');
     function begin() {
       router.push("/intro");
     }
     return {
       welcomeParagraph,
+      HomeImage,
       begin,
     };
   },
